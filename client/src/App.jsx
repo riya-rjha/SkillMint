@@ -4,12 +4,14 @@ import CourseSearchForm from "./components/CourseSearchForm";
 import StatsSection from "./components/StatsSection";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import MainComponent from "./components/MainComponent";
 
 const App = () => {
   return (
     <div className="bg-black text-white">
       <Navbar />
       <HeroSection />
+      <MainComponent/>
       <CourseSearchForm />
       <StatsSection />
       <Footer />

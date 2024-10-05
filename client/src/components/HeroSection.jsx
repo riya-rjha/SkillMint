@@ -11,7 +11,7 @@ const HeroSection = () => {
           <p className="text-lg text-gray-200">Discover and trade courses as NFTs!</p>
         </div>
       </div>
-      <img className="w-96 h-80 rounded-2xl shadow-lg mt-6" src="https://via.placeholder.com/540x340" alt="Course Thumbnail" />
+
     </div>
   );
 };

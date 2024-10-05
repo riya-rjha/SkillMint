@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import React from "react";
+import HeroSection from "./components/HeroSection";
+import CourseSearchForm from "./components/CourseSearchForm";
+import StatsSection from "./components/StatsSection";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <p className='text-4xl'>Init</p>
-    </>
-  )
-}
+    <div className="bg-black text-white">
+      <Navbar />
+      <HeroSection />
+      <CourseSearchForm />
+      <StatsSection />
+      <Footer />
+    </div>
+  );
+};
 
-export default App
+export default App;

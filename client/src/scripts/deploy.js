@@ -1,5 +1,7 @@
+const hre = require('hardhat')
+
 async function main() {
-	const SkillMint = await ethers.getContractFactory("SkillMint");
+	const SkillMint = await hre.ethers.getContractFactory("SkillMint");
 	const skillMint = await SkillMint.deploy();
 	await skillMint.deployed();
 	console.log("SkillMint deployed to:", skillMint.address);

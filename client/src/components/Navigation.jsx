@@ -1,11 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
-    <nav className="container mx-auto p-4 flex justify-between items-center">
-            <Link to="/" className="text-2xl font-bold text-[#ffffff]">Skill<span className="text-[#3FA37A]">Mint</span></Link>
+    <nav className="p-4 flex justify-between items-center sticky top-0 z-10  backdrop-blur-lg shadow-md w-full">
+      <Link to="/" className="text-2xl font-bold text-[#ffffff]">
+        Skill<span className="text-[#3FA37A]">Mint</span>
+      </Link>
       <div className="space-x-4">
         <Link to="/courses" className="text-white hover:text-[#3FA37A]">
           Browse Courses

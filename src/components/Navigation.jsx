@@ -1,0 +1,33 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+
+
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+};
+
+
+function Navigation() {
+  return (
+    <nav className="container mx-auto p-4 flex justify-between items-center">
+      <Link to="/" className="text-2xl font-bold text-[#3FA37A]">SkillMint</Link>
+      <div className="space-x-4">
+        <Link to="/courses" className="text-white hover:text-[#3FA37A]">
+          Browse Courses
+        </Link>
+        <Link to="/dashboard" className="text-white hover:text-[#3FA37A]">
+          Dashboard
+        </Link>
+        <button className="border border-[#3FA37A] text-[#3FA37A] hover:bg-[#3FA37A] hover:text-white px-4 py-2 rounded">
+          Connect Wallet
+        </button>
+      </div>
+    </nav>
+  );
+}
+
+export default Navigation;

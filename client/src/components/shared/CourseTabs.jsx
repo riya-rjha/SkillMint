@@ -34,7 +34,7 @@ const CourseTabs = () => {
               <span className="ml-1 text-white">{course.rating}</span>
               <span className="ml-2 text-sm text-gray-400">({course.reviews} reviews)</span>
             </div>
-            <span className="text-lg font-bold text-white">{course.price} ETH</span>
+            <span className="text-lg font-bold text-white">{course.price}</span>
           </div>
         </div>
       ))}

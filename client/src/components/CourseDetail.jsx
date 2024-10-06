@@ -1,27 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import courses from './shared/CourseDetails.json'
 
 function CourseDetail() {
   const { id } = useParams();
-  
-  const courseInfo = {
-    title: "Advanced Blockchain Development",
-    instructor: "Alex Thompson",
-    rating: 4.8,
-    students: 1240,
-    price: "0.8 ETH",
-    description: "Master the art of blockchain development with our comprehensive course. Learn how to create, test, and deploy smart contracts, build decentralized applications, and understand the intricacies of blockchain technology.",
-    modules: [
-      {
-        title: "Introduction to Smart Contracts",
-        lessons: ["Understanding Smart Contract Basics", "Setting Up Your Development Environment"]
-      },
-      {
-        title: "Solidity Deep Dive",
-        lessons: ["Data Types and Variables", "Functions and Modifiers"]
-      }
-    ]
-  };
+  const courseInfo = courses.find((course) => course.id == id);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -61,7 +44,7 @@ function CourseDetail() {
         
         <div className="lg:col-span-1">
           <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 sticky top-4">
-            <img src="https://via.placeholder.com/400x225" alt="Course preview" className="w-full rounded-lg mb-4" />
+            <img src={courseInfo.imgUrl} alt="Course preview" className="w-full rounded-lg mb-4" />
             <div className="text-3xl font-bold mb-6">{courseInfo.price}</div>
             <button className="w-full bg-[#3FA37A] hover:bg-[#2D8960] text-white py-3 rounded-lg mb-4">
               Enroll Now

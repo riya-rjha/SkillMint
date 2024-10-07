@@ -19,6 +19,7 @@ function CourseDetail() {
 
 	const {
 		loading,
+		setLoading,
 		purchasedCourses,
 		setPurchasedCourses,
 		coursePrices,
@@ -41,6 +42,7 @@ function CourseDetail() {
 
 	const purchaseCourse = async (courseId) => {
 		try {
+			setLoading(true)
 			const price = coursePrices[courseId];
 			const tx = await contract.purchaseCourse(courseId, {
 				value: price,
@@ -52,6 +54,9 @@ function CourseDetail() {
 			}));
 		} catch (err) {
 			console.error("Failed to purchase course:", err);
+		}
+		finally{
+			setLoading(false)
 		}
 	};
 

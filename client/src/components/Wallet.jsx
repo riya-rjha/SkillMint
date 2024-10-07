@@ -4,7 +4,6 @@ import { AppContext } from '../context/AppContext.jsx';
 import abi from "../contract/abi.json";
 import {
 	Wallet,
-	ShoppingCart,
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -16,15 +15,7 @@ export default function CourseStore() {
 			setAccount,
 			contract,
 			setContract,
-			loading,
-			setLoading,
-			error,
-			setError,
-			success,
-			setSuccess,
-			purchasedCourses,
 			setPurchasedCourses,
-			coursePrices,
 			setCoursePrices,
 		} = useContext(AppContext);
 

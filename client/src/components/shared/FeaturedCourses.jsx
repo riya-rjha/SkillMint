@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+
 
 function FeaturedCourses() {
   const courses = [
@@ -29,10 +31,25 @@ function FeaturedCourses() {
   return (
     <div className="bg-gray-900 p-8 rounded-2xl">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-4">Featured Courses</h2>
-        <p className="text-gray-400">Discover top-rated blockchain courses from expert instructors</p>
+      <motion.h2
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-7xl mt-10 font-bold mb-8 text-center"
+          >
+            Featured Courses
+          </motion.h2>
+          <motion.p
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-1xl font-bold mb-8 text-center"
+          >
+            <p className="text-gray-400 mb-20">Discover top-rated blockchain courses from expert instructors</p>
+          </motion.p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-36 mb-20">
         {courses.map((course) => (
           <div key={course.id} className="bg-black border border-gray-800 rounded-lg overflow-hidden">
             <img src={course.image} alt={course.title} className="w-full h-48 object-cover" />

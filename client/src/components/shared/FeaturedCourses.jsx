@@ -5,24 +5,24 @@ function FeaturedCourses() {
   const courses = [
     {
       id: 1,
-      title: "Blockchain Fundamentals",
-      description: "Learn the basics of blockchain technology",
-      price: "0.5 ETH",
-      image: "https://via.placeholder.com/400x225"
+      title: "Data Structures & Algorithms Mastery in Java: From Basics to Advanced",
+      description: "Become a master in data structures and algorithms using Java, starting from basics to advanced concepts.",
+      price: "0.012 ETH",
+      image: "https://img.freepik.com/free-photo/futurism-perspective-digital-nomads-lifestyle_23-2151252417.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid"
     },
     {
       id: 2,
-      title: "Smart Contract Development",
-      description: "Master Solidity programming",
-      price: "0.8 ETH",
-      image: "https://via.placeholder.com/400x225"
+      title: "Comprehensive Data Structures & Algorithms Course: C++ Edition",
+      description: "Master data structures and algorithms using C++, with step-by-step lessons from basics to advanced concepts.",
+      price: "0.01 ETH",
+      image: "https://img.freepik.com/premium-photo/laptop-with-word-code-screen-is-open-word-code-is-screen_1077470-2841.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid"
     },
     {
       id: 3,
-      title: "DeFi Protocols",
-      description: "Explore decentralized finance",
-      price: "1.0 ETH",
-      image: "https://via.placeholder.com/400x225"
+      title: "React.js Professional Bootcamp: Building Modern Web Applications",
+      description: "Learn to build professional-grade web applications using React.js in this comprehensive bootcamp.",
+      price: "0.016 ETH",
+      image: "https://img.freepik.com/premium-photo/laptop-screen-displaying-blockchain-code-surrounded-by-coffee-cup-notepad-stylized-crypto_894218-35810.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid"
     }
   ];
 

@@ -3,14 +3,24 @@ import courses from './shared/CourseDetails.json'
 import toast from 'react-hot-toast';
 import {
 	Wallet,
+  	Play,
+  	Lock,
 	ShoppingCart,
 	AlertCircle,
 	CheckCircle2,
 	Loader,
 } from "lucide-react";
-import React, { useContext } from 'react';
+import React, { useContext, useRef} from 'react';
 import { AppContext } from '../context/AppContext.jsx';
 function CourseDetail() {
+
+	const videoRef = useRef(null);
+
+	const handlePlayVideo = () => {
+		if (videoRef.current) {
+			videoRef.current.play();
+		}
+	};
 
     const {
 			account,
@@ -104,6 +114,34 @@ function CourseDetail() {
 								</ul>
 							</div>
 						))}
+					</div>
+
+					{/* <div className='bg-gray-900 border border-gray-800 rounded-lg p-6 mt-8'>
+						<h2 className='text-xl font-semibold mb-4'>Course Videos</h2>
+						<p className='text-gray-400'>{courseInfo.description}</p>
+					</div> */}
+
+					<div className='bg-gray-900 border border-gray-800 rounded-lg p-6 mt-4'>
+						<h2 className='text-2xl font-bold mb-4'>Course Videos</h2>
+						<div className='flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors'>
+							<span className='text-gray-700'>Introduction to the Course</span>
+							{purchasedCourses[id] ? (
+								<Play className=' cursor-pointer text-gray-500' size={20} />
+							) : (
+								<Lock
+									onClick={handlePlayVideo}
+									className=' cursor-pointer text-gray-500'
+									size={20}
+								/>
+							)}
+						</div>
+						<video width='600' controls>
+							<source
+								src='./cpp.mp4'
+								type='video/mp4'
+							/>
+							Your browser does not support the video tag.
+						</video>
 					</div>
 				</div>
 

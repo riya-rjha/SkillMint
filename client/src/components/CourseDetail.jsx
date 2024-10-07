@@ -1,76 +1,56 @@
-import { useParams } from 'react-router-dom';
-import courses from './shared/CourseDetails.json'
-import toast from 'react-hot-toast';
+import { useParams } from "react-router-dom";
+import { useState, useContext, useRef } from "react";
+import courses from "./shared/CourseDetails.json";
 import {
-	Wallet,
-  	Play,
-  	Lock,
+	Play,
+	Lock,
 	ShoppingCart,
-	AlertCircle,
 	CheckCircle2,
 	Loader,
+	ChevronDown,
+	ChevronUp,
 } from "lucide-react";
-import React, { useContext, useRef} from 'react';
-import { AppContext } from '../context/AppContext.jsx';
-function CourseDetail() {
+import { AppContext } from "../context/AppContext.jsx";
 
+function CourseDetail() {
+	const [videoVisible, setVideoVisible] = useState({});
 	const videoRef = useRef(null);
 
-	const handlePlayVideo = () => {
-		if (videoRef.current) {
-			videoRef.current.play();
-		}
+	const {
+		loading,
+		purchasedCourses,
+		setPurchasedCourses,
+		coursePrices,
+		contract,
+	} = useContext(AppContext);
+
+	const toggleVideo = (lessonIndex) => {
+		setVideoVisible((prev) => ({
+			...prev,
+			[lessonIndex]: !prev[lessonIndex],
+		}));
 	};
 
-    const {
-			account,
-			setAccount,
-			contract,
-			setContract,
-			loading,
-			setLoading,
-			error,
-			setError,
-			success,
-			setSuccess,
-			purchasedCourses,
-			setPurchasedCourses,
-			coursePrices,
-			setCoursePrices,
-		} = useContext(AppContext);
-
-  const purchaseCourse = async (courseId) => {
+	const purchaseCourse = async (courseId) => {
 		try {
-			setLoading(true);
-			// const purchaseToast = toast.loading("Processing purchase...");
-
 			const price = coursePrices[courseId];
-
 			const tx = await contract.purchaseCourse(courseId, {
 				value: price,
 			});
-
 			await tx.wait();
-
-			// Update the purchased status for this course
 			setPurchasedCourses((prev) => ({
 				...prev,
 				[courseId]: true,
 			}));
-
-			// toast.success(`Successfully purchased course ${id}!`, {
-			// 	id: purchaseToast,
-			// });
 		} catch (err) {
-			// toast.error("Failed to purchase course: " + err.message);
-		} finally {
-			setLoading(false);
+			console.error("Failed to purchase course:", err);
 		}
 	};
-  const { id } = useParams();
-  const courseInfo = courses.find((course) => course.id == id);
 
-  return (
+	const { id } = useParams();
+	const courseInfo = courses.find((course) => course.id == id);
+
+	return (
 		<div className='container mx-auto px-4 py-8'>
 			<div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
 				<div className='lg:col-span-2'>
@@ -94,57 +74,60 @@ function CourseDetail() {
 					</div>
 
 					<div className='bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8'>
-						<h2 className='text-xl font-semibold mb-4'>About This Course</h2>
-						<p className='text-gray-400'>{courseInfo.description}</p>
+						<h2 className='text-2xl font-semibold mb-4'>About This Course</h2>
+						<p className='text-gray-400 text-lg'>{courseInfo.description}</p>
 					</div>
 
-					<div className='space-y-4'>
-						{courseInfo.modules.map((module, index) => (
-							<div
-								key={index}
-								className='bg-gray-900 border border-gray-800 rounded-lg p-6'
-							>
-								<h3 className='text-lg font-semibold mb-4'>{module.title}</h3>
-								<ul className='space-y-2'>
-									{module.lessons.map((lesson, lessonIndex) => (
-										<li key={lessonIndex} className='text-gray-400'>
-											• {lesson}
-										</li>
-									))}
-								</ul>
+					{/* Course videos section */}
+					<div className='bg-gray-900 border border-gray-800 rounded-lg p-6 mt-4'>
+						<h2 className='text-2xl font-bold mb-4'>Course Videos</h2>
+						{courseInfo.modules.map((module, moduleIndex) => (
+							<div key={moduleIndex} className='mb-6'>
+								<h3 className='text-lg font-semibold mb-2'>{module.title}</h3>
+								{module.lessons.map((lesson, lessonIndex) => (
+									<div key={lessonIndex} className='mb-4'>
+										<div
+											className='flex items-center justify-between p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer'
+											onClick={() =>
+												purchasedCourses[id] && toggleVideo(lessonIndex)
+											}
+										>
+											<span className='text-gray-200'>{lesson}</span>
+											{purchasedCourses[id] ? (
+												videoVisible[lessonIndex] ? (
+													<ChevronUp className='text-gray-400' size={20} />
+												) : (
+													<ChevronDown className='text-gray-400' size={20} />
+												)
+											) : (
+												<Lock className='text-gray-400' size={20} />
+											)}
+										</div>
+
+										{/* Video dropdown */}
+										<div
+											className={`transition-all duration-300 ease-in-out overflow-hidden ${
+												videoVisible[lessonIndex] ? "max-h-96 mt-4" : "max-h-0"
+											}`}
+										>
+											<video
+												width='100%'
+												controls
+												className='rounded-lg'
+												ref={videoRef}
+											>
+												<source src='./cpp.mp4' type='video/mp4' />
+												Your browser does not support the video tag.
+											</video>
+										</div>
+									</div>
+								))}
 							</div>
 						))}
 					</div>
-
-					{/* <div className='bg-gray-900 border border-gray-800 rounded-lg p-6 mt-8'>
-						<h2 className='text-xl font-semibold mb-4'>Course Videos</h2>
-						<p className='text-gray-400'>{courseInfo.description}</p>
-					</div> */}
-
-					<div className='bg-gray-900 border border-gray-800 rounded-lg p-6 mt-4'>
-						<h2 className='text-2xl font-bold mb-4'>Course Videos</h2>
-						<div className='flex items-center justify-between p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors'>
-							<span className='text-gray-700'>Introduction to the Course</span>
-							{purchasedCourses[id] ? (
-								<Play className=' cursor-pointer text-gray-500' size={20} />
-							) : (
-								<Lock
-									onClick={handlePlayVideo}
-									className=' cursor-pointer text-gray-500'
-									size={20}
-								/>
-							)}
-						</div>
-						<video width='600' controls>
-							<source
-								src='./cpp.mp4'
-								type='video/mp4'
-							/>
-							Your browser does not support the video tag.
-						</video>
-					</div>
 				</div>
 
+				{/* Right sidebar */}
 				<div className='lg:col-span-1'>
 					<div className='bg-gray-900 border border-gray-800 rounded-lg p-6 sticky top-4'>
 						<img

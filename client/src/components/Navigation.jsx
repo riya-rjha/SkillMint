@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from 'framer-motion';
-
-
+import Wallet from './Wallet'
 
 function Navigation() {
   return (
@@ -58,7 +57,7 @@ function Navigation() {
             whileHover={{ scale: 1.05, boxShadow: "0 0 8px rgb(63, 163, 122)" }}
             whileTap={{ scale: 0.95 }}
           >
-            Connect Wallet
+            <Wallet />
           </motion.button>
       </div>
     </nav>

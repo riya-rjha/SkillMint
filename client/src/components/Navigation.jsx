@@ -5,8 +5,6 @@ import Wallet from './Wallet'
 
 function Navigation() {
   return (
-
-    
     <nav className="p-4 flex justify-between items-center sticky top-0 z-10  backdrop-blur-lg shadow-md w-full">
       <Link to="/" className="text-2xl font-bold text-[#ffffff]">
         Skill<span className="text-[#3FA37A]">Mint</span>

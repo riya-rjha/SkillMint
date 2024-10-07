@@ -5,6 +5,7 @@ import HomePage from './components/HomePage';
 import CourseTabs from './components/shared/CourseTabs';
 import CourseDetail from './components/CourseDetail';
 import Dashboard from './components/Dashboard';
+import SingleCourse from './components/SingleCourse';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/courses" element={<CourseTabs />} />
           <Route path="/course/:id" element={<CourseDetail />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/course-single" element={<SingleCourse />} />
         </Routes>
       </div>
     </Router>

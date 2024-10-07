@@ -126,20 +126,12 @@ function CourseDetail() {
 													: "max-h-0"
 											}`}
 										>
-											<video
+											<iframe
+												src={courseInfo.video}
 												width='100%'
-												controls
-												className='rounded-lg'
-												ref={(el) => {
-													if (!videoRefs.current[moduleIndex]) {
-														videoRefs.current[moduleIndex] = {};
-													}
-													videoRefs.current[moduleIndex][lessonIndex] = el;
-												}}
-											>
-												<source src='./cpp.mp4' type='video/mp4' />
-												Your browser does not support the video tag.
-											</video>
+												height='360'
+												allow='autoplay'
+											></iframe>
 										</div>
 									</div>
 								))}

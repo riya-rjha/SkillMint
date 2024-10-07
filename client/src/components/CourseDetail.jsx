@@ -13,8 +13,9 @@ import {
 import { AppContext } from "../context/AppContext.jsx";
 
 function CourseDetail() {
+	// Update state to use a nested structure
 	const [videoVisible, setVideoVisible] = useState({});
-	const videoRef = useRef(null);
+	const videoRefs = useRef({});
 
 	const {
 		loading,
@@ -24,11 +25,18 @@ function CourseDetail() {
 		contract,
 	} = useContext(AppContext);
 
-	const toggleVideo = (lessonIndex) => {
+	const toggleVideo = (moduleIndex, lessonIndex) => {
 		setVideoVisible((prev) => ({
 			...prev,
-			[lessonIndex]: !prev[lessonIndex],
+			[moduleIndex]: {
+				...prev[moduleIndex],
+				[lessonIndex]: !prev[moduleIndex]?.[lessonIndex],
+			},
 		}));
+	};
+
+	const isVideoVisible = (moduleIndex, lessonIndex) => {
+		return videoVisible[moduleIndex]?.[lessonIndex] || false;
 	};
 
 	const purchaseCourse = async (courseId) => {
@@ -89,12 +97,13 @@ function CourseDetail() {
 										<div
 											className='flex items-center justify-between p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer'
 											onClick={() =>
-												purchasedCourses[id] && toggleVideo(lessonIndex)
+												purchasedCourses[id] &&
+												toggleVideo(moduleIndex, lessonIndex)
 											}
 										>
 											<span className='text-gray-200'>{lesson}</span>
 											{purchasedCourses[id] ? (
-												videoVisible[lessonIndex] ? (
+												isVideoVisible(moduleIndex, lessonIndex) ? (
 													<ChevronUp className='text-gray-400' size={20} />
 												) : (
 													<ChevronDown className='text-gray-400' size={20} />
@@ -107,14 +116,21 @@ function CourseDetail() {
 										{/* Video dropdown */}
 										<div
 											className={`transition-all duration-300 ease-in-out overflow-hidden ${
-												videoVisible[lessonIndex] ? "max-h-96 mt-4" : "max-h-0"
+												isVideoVisible(moduleIndex, lessonIndex)
+													? "max-h-96 mt-4"
+													: "max-h-0"
 											}`}
 										>
 											<video
 												width='100%'
 												controls
 												className='rounded-lg'
-												ref={videoRef}
+												ref={(el) => {
+													if (!videoRefs.current[moduleIndex]) {
+														videoRefs.current[moduleIndex] = {};
+													}
+													videoRefs.current[moduleIndex][lessonIndex] = el;
+												}}
 											>
 												<source src='./cpp.mp4' type='video/mp4' />
 												Your browser does not support the video tag.

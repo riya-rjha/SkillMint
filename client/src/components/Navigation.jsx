@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Wallet from './Wallet'
 
 function Navigation() {
   return (
@@ -15,7 +16,8 @@ function Navigation() {
           Dashboard
         </Link>
         <button className="border border-[#3FA37A] text-[#3FA37A] hover:bg-[#3FA37A] hover:text-white px-4 py-2 rounded">
-          Connect Wallet
+          {/* Connect Wallet */}  
+          <Wallet />
         </button>
       </div>
     </nav>

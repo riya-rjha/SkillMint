@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import FeaturedCourses from './shared/FeaturedCourses';
-import Navigation from './Navigation';
-
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import FeaturedCourses from "./shared/FeaturedCourses";
+import Navigation from "./Navigation";
+import { Link } from "react-router-dom";
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState("home");
   const [isLoading, setIsLoading] = useState(false);
 
   const changePage = (page) => {
@@ -18,15 +18,15 @@ const App = () => {
 
   const renderPage = () => {
     switch (currentPage) {
-      case 'home':
+      case "home":
         return <HomePage />;
-      case 'about':
+      case "about":
         return <AboutPage />;
-      case 'team':
+      case "team":
         return <TeamPage />;
-      case 'courses':
+      case "courses":
         return <CoursesPage />;
-      case 'contact':
+      case "contact":
         return <ContactPage />;
       default:
         return <HomePage />;
@@ -36,18 +36,14 @@ const App = () => {
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <AnimatePresence mode="wait">
-        {isLoading ? (
-          <LoadingAnimation key="loading" />
-        ) : (
-          renderPage()
-        )}
+        {isLoading ? <LoadingAnimation key="loading" /> : renderPage()}
       </AnimatePresence>
       <Footer />
     </div>
   );
 };
 
-<Navigation/>
+<Navigation />;
 
 const Footer = () => {
   return (
@@ -108,19 +104,25 @@ const HomePage = () => {
             transition={{ delay: 0.4 }}
             className="text-3xl mb-20 max-w-3xl mx-auto mt-14"
           >
-            SkillMint connects learners directly with expert instructors through secure,
-            decentralized courses. Unlock your potential while supporting creators.
+            SkillMint connects learners directly with expert instructors through
+            secure, decentralized courses. Unlock your potential while
+            supporting creators.
           </motion.p>
-          <motion.button
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgb(63, 163, 122)" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-[#3FA37A] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-80 transition-all"
-          >
-            Start Learning Now
-          </motion.button>
+          <Link to="/courses">
+            <motion.button
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgb(63, 163, 122)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-[#3FA37A] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-80 transition-all"
+            >
+              Start Learning Now
+            </motion.button>
+          </Link>
         </div>
       </header>
 
@@ -137,22 +139,43 @@ const HomePage = () => {
           </motion.h2>
           <div className="grid grid-cols-1 mt-40 md:grid-cols-3 gap-8">
             {[
-              { title: "Connect", icon: "🔗", description: "Link your wallet to join the SkillMint ecosystem" },
-              { title: "Learn", icon: "📚", description: "Access high-quality courses from expert instructors" },
-              { title: "CertiNFT", icon: " 🎓", description: "Earn CertiNFTs as proof of your blockchain achievements." }
+              {
+                title: "Connect",
+                icon: "🔗",
+                description: "Link your wallet to join the SkillMint ecosystem",
+              },
+              {
+                title: "Learn",
+                icon: "📚",
+                description:
+                  "Access high-quality courses from expert instructors",
+              },
+              {
+                title: "CertiNFT",
+                icon: " 🎓",
+                description:
+                  "Earn CertiNFTs as proof of your blockchain achievements.",
+              },
             ].map((step, index) => (
               <motion.div
                 key={index}
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(63, 163, 122, 0.3)" }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(63, 163, 122, 0.3)",
+                }}
                 className="bg-white bg-opacity-5 p-20 rounded-lg text-center"
               >
                 <motion.div
                   className="text-4xl mb-4"
                   animate={{ rotate: [0, 10, 0, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: index * 0.2,
+                  }}
                 >
                   {step.icon}
                 </motion.div>
@@ -189,7 +212,10 @@ const HomePage = () => {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)" }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
+            }}
             whileTap={{ scale: 0.95 }}
             className="bg-white text-[#3FA37A] px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all"
           >

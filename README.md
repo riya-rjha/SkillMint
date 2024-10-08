@@ -4,7 +4,7 @@
 
 SkillMint is a revolutionary Web3-based skill learning platform where knowledge meets blockchain technology. Our platform enables creators to publish courses and learners to access quality education while earning verifiable credentials as NFTs.
 
-![SkillMint Banner](https://via.placeholder.com/800x200)
+![SkillMint Banner](https://imgur.com/uzCX52F.png)
 
 ## 🌟 Features
 

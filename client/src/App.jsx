@@ -1,13 +1,26 @@
-import { useState } from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import HomePage from './components/HomePage';
+import CourseTabs from './components/shared/CourseTabs';
+import CourseDetail from './components/CourseDetail';
+import Dashboard from './components/Dashboard';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <p className='text-4xl'>Init</p>
-    </>
-  )
+    <Router>
+      <div className="min-h-screen bg-black text-white">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/courses" element={<CourseTabs />} />
+          <Route path="/course/:id" element={<CourseDetail />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

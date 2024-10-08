@@ -100,7 +100,7 @@ npm run dev
 
 ## 🏆 Hackathon Details
 
-This project was created for [Hackathon Name], focusing on revolutionizing education through blockchain technology.
+This project was created for Aurora, focusing on revolutionizing education through blockchain technology.
 
 ### Problem Statement
 Traditional online learning platforms lack:
@@ -117,4 +117,4 @@ SkillMint addresses these issues by:
 
 ---
 
-<p align="center">Built with 💚 by the SkillMint Team</p>
+<p align="center">Built with 💚 by the MATRX Coders</p>

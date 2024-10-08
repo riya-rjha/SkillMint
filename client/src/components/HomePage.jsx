@@ -52,12 +52,12 @@ const App = () => {
 
 const Footer = () => {
   return (
-    <footer className="flex justify-center items-center bg-blue-400 bg-opacity-30 py-3 mt-auto ">
-      <div className="mx-auto px-6">
-        <p>&copy; 2024 SkillMint. All rights reserved.</p>
-      </div>
-    </footer>
-  );
+		<footer className='flex justify-center items-center bg-[#111827] bg-opacity-30 py-3 mt-auto '>
+			<div className='mx-auto px-6'>
+				<p>&copy; 2024 SkillMint. All rights reserved.</p>
+			</div>
+		</footer>
+	);
 };
 
 const LoadingAnimation = () => {

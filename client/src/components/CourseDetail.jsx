@@ -70,9 +70,9 @@ function CourseDetail() {
 					<h1 className='text-4xl font-bold mb-4'>{courseInfo.title}</h1>
 					<div className='flex items-center space-x-4 mb-6'>
 						<img
-							src='https://via.placeholder.com/40'
+							src={courseInfo.profilePic}
 							alt='Instructor'
-							className='rounded-full'
+							className='rounded-full w-16'
 						/>
 						<div>
 							<p className='text-[#3FA37A]'>{courseInfo.instructor}</p>

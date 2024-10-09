@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useContext, useRef } from "react";
+import MintCertificateButton from "./MintCertificateButton.jsx";
 import {
 	Play,
 	Lock,
@@ -22,8 +23,6 @@ function CourseDetail() {
 			imgUrl:
 				"https://img.freepik.com/free-photo/futurism-perspective-digital-nomads-lifestyle_23-2151252417.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 			instructor: "Michael Chen",
-			video:
-				"https://drive.google.com/file/d/137e4vr6_PkSJlLR8GUV5pWfFsgpeEA-H/preview",
 			rating: 4.5,
 			students: 125,
 			price: "0.012 ETH",
@@ -39,16 +38,15 @@ function CourseDetail() {
 					lessons: ["Graph Theory", "Dynamic Programming"],
 				},
 			],
+			profilePic:
+				"https://img.freepik.com/premium-photo/business-man-pointing-something-him-smiling-camera-white-background_564692-56569.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 		},
 		{
 			id: 2,
 			title: "Comprehensive Data Structures & Algorithms Course: C++ Edition",
 			imgUrl:
 				"https://img.freepik.com/premium-photo/laptop-with-word-code-screen-is-open-word-code-is-screen_1077470-2841.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
-			video:
-				"https://drive.google.com/file/d/1v4OeREJh71a4R47G_lY8o6mCRpNKrArS/preview",
-			instructor: "Sarah Patel",
-
+			instructor: "Sagar Patel",
 			rating: 4.7,
 			students: 200,
 			price: "0.01 ETH",
@@ -67,15 +65,15 @@ function CourseDetail() {
 					lessons: ["Greedy Algorithms", "Backtracking and Recursion"],
 				},
 			],
+			profilePic:
+				"https://img.freepik.com/premium-photo/smiling-young-male-professional-standing-with-his-arms-crossed-making-eye-contact-against_951300-216.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 		},
 		{
 			id: 3,
 			title: "React.js Professional Bootcamp: Building Modern Web Applications",
 			imgUrl:
 				"https://img.freepik.com/premium-photo/laptop-screen-displaying-blockchain-code-surrounded-by-coffee-cup-notepad-stylized-crypto_894218-35810.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
-			instructor: "Emily Rodriguez",
-			video:
-				"https://drive.google.com/file/d/1IeYFv4_PTJw7w8RzOLNXSK2mTMUKff1a/preview",
+			instructor: "Popye Rodriguez",
 			rating: 4.8,
 			students: 300,
 			price: "0.016 ETH",
@@ -91,6 +89,8 @@ function CourseDetail() {
 					lessons: ["React Hooks", "Managing State with Redux"],
 				},
 			],
+			profilePic:
+				"https://img.freepik.com/free-photo/smiling-young-man-with-crossed-arms-outdoors_1140-255.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 		},
 		{
 			id: 4,
@@ -99,8 +99,6 @@ function CourseDetail() {
 			imgUrl:
 				"https://img.freepik.com/premium-photo/laptop-screen-displaying-blockchain-code-surrounded-by-coffee-cup-notepad-stylized-crypto_894218-35825.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 			instructor: "David Kim",
-			video:
-				"https://drive.google.com/file/d/1zFeig7WKSS-3e2sjkdq2D0qupjBLTqD1/preview",
 			rating: 4.6,
 			students: 150,
 			price: "0.008 ETH",
@@ -122,6 +120,8 @@ function CourseDetail() {
 					],
 				},
 			],
+			profilePic:
+				"https://img.freepik.com/premium-photo/httpssmjrunqa-pl0patcu-18-years-old-young-girl-long-wavy-black-hair-wearing-white-office-clothes_1107779-28624.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 		},
 		{
 			id: 5,
@@ -130,8 +130,6 @@ function CourseDetail() {
 			imgUrl:
 				"https://img.freepik.com/free-photo/young-adult-programmer-typing-computer-office-generated-by-ai_188544-20410.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 			instructor: "Dr. Sophia Nguyen",
-			video:
-				"https://drive.google.com/file/d/1uiZtmhGqwdV_L-otKGnlo6pTMCTHe2ac/preview",
 			rating: 4.9,
 			students: 500,
 			price: "0.02 ETH",
@@ -150,8 +148,11 @@ function CourseDetail() {
 					lessons: ["Linear Regression", "Neural Networks and Deep Learning"],
 				},
 			],
+			profilePic:
+				"https://img.freepik.com/free-photo/young-beautiful-woman-looking-camera-trendy-girl-casual-summer-white-t-shirt-jeans-shorts-positive-female-shows-facial-emotions-funny-model-isolated-yellow_158538-15796.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 		},
 	];
+
 
 
 	const {
@@ -208,9 +209,10 @@ function CourseDetail() {
 					<h1 className='text-4xl font-bold mb-4'>{courseInfo.title}</h1>
 					<div className='flex items-center space-x-4 mb-6'>
 						<img
-							src='https://via.placeholder.com/40'
+							src={courseInfo.profilePic}
 							alt='Instructor'
 							className='rounded-full'
+							width={40}
 						/>
 						<div>
 							<p className='text-[#3FA37A]'>{courseInfo.instructor}</p>
@@ -313,6 +315,7 @@ function CourseDetail() {
 								</>
 							)}
 						</button>
+						<MintCertificateButton />
 						<p className='text-sm text-gray-400 text-center mt-3'>
 							30-day money-back guarantee
 						</p>

@@ -25,6 +25,8 @@ function CourseDetail() {
 			instructor: "Michael Chen",
 			rating: 4.5,
 			students: 125,
+			video:
+				"https://drive.google.com/file/d/137e4vr6_PkSJlLR8GUV5pWfFsgpeEA-H/preview",
 			price: "0.012 ETH",
 			description:
 				"Become a master in data structures and algorithms using Java, starting from basics to advanced concepts.",
@@ -49,6 +51,8 @@ function CourseDetail() {
 			instructor: "Sagar Patel",
 			rating: 4.7,
 			students: 200,
+			video:
+				"https://drive.google.com/file/d/1v4OeREJh71a4R47G_lY8o6mCRpNKrArS/preview",
 			price: "0.01 ETH",
 			description:
 				"Master data structures and algorithms using C++, with step-by-step lessons from basics to advanced concepts.",
@@ -75,6 +79,8 @@ function CourseDetail() {
 				"https://img.freepik.com/premium-photo/laptop-screen-displaying-blockchain-code-surrounded-by-coffee-cup-notepad-stylized-crypto_894218-35810.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 			instructor: "Popye Rodriguez",
 			rating: 4.8,
+			video:
+				"https://drive.google.com/file/d/1IeYFv4_PTJw7w8RzOLNXSK2mTMUKff1a/preview",
 			students: 300,
 			price: "0.016 ETH",
 			description:
@@ -99,6 +105,8 @@ function CourseDetail() {
 			imgUrl:
 				"https://img.freepik.com/premium-photo/laptop-screen-displaying-blockchain-code-surrounded-by-coffee-cup-notepad-stylized-crypto_894218-35825.jpg?ga=GA1.1.448448890.1721050418&semt=ais_hybrid",
 			instructor: "David Kim",
+			video:
+				"https://drive.google.com/file/d/1zFeig7WKSS-3e2sjkdq2D0qupjBLTqD1/preview",
 			rating: 4.6,
 			students: 150,
 			price: "0.008 ETH",
@@ -132,6 +140,8 @@ function CourseDetail() {
 			instructor: "Dr. Sophia Nguyen",
 			rating: 4.9,
 			students: 500,
+			video:
+				"https://drive.google.com/file/d/1uiZtmhGqwdV_L-otKGnlo6pTMCTHe2ac/preview",
 			price: "0.02 ETH",
 			description:
 				"Gain a strong foundation in machine learning, from theory to implementing real-world applications.",

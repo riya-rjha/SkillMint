@@ -1,26 +1,28 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ethers } from "ethers";
-import { AppContext } from '../context/AppContext.jsx';
+import { AppContext } from "../context/AppContext.jsx";
 import abi from "../contract/abi.json";
-import {
-	Wallet,
-} from "lucide-react";
+import { Wallet } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
 const CONTRACT_ADDRESS = "0x390BdF96BE37813D2f078bbA98479545134151c6";
+const HOLESKY_CHAIN_ID = "0x4268"; // 17000 in hexadecimal
+
+
 
 export default function CourseStore() {
-	  const {
-			account,
-			setAccount,
-			contract,
-			setContract,
-			setPurchasedCourses,
-			setCoursePrices,
-		} = useContext(AppContext);
+	const {
+		account,
+		setAccount,
+		contract,
+		setContract,
+		setPurchasedCourses,
+		setCoursePrices,
+	} = useContext(AppContext);
 
 	useEffect(() => {
 		connectWallet();
+		switchToHoleskyNetwork();
 
 		// Add event listeners for account changes
 		if (window.ethereum) {
@@ -41,7 +43,8 @@ export default function CourseStore() {
 			getCoursePrices();
 		}
 	}, [contract, account]);
-
+	 const [status, setStatus] = useState("checking"); // 'checking', 'switching', 'success', 'error'
+		const [message, setMessage] = useState("");
 	const handleAccountChange = async (accounts) => {
 		if (accounts.length === 0) {
 			// User disconnected their wallet
@@ -68,6 +71,74 @@ export default function CourseStore() {
 				);
 				setContract(contractInstance);
 			}
+		}
+	};
+
+	const switchToHoleskyNetwork = async () => {
+		if (typeof window.ethereum === "undefined") {
+			setStatus("error");
+			setMessage("MetaMask is not installed!");
+			return;
+		}
+
+		try {
+			const provider = new ethers.BrowserProvider(window.ethereum);
+			const network = await provider.getNetwork();
+
+			// Check if already on Holesky
+			if (network.chainId === 17000) {
+				setStatus("success");
+				setMessage("Already connected to Holesky network");
+				return;
+			}
+
+			setStatus("switching");
+			setMessage("Switching to Holesky network...");
+
+			try {
+				// Try to switch to Holesky network
+				await window.ethereum.request({
+					method: "wallet_switchEthereumChain",
+					params: [{ chainId: HOLESKY_CHAIN_ID }],
+				});
+				setStatus("success");
+				setMessage("Successfully switched to Holesky network");
+			} catch (switchError) {
+				// This error code indicates that the chain has not been added to MetaMask
+				if (switchError.code === 4902) {
+					try {
+						await window.ethereum.request({
+							method: "wallet_addEthereumChain",
+							params: [
+								{
+									chainId: HOLESKY_CHAIN_ID,
+									chainName: "Holesky",
+									nativeCurrency: {
+										name: "Holesky ETH",
+										symbol: "ETH",
+										decimals: 18,
+									},
+									rpcUrls: ["https://holesky.drpc.org"],
+									blockExplorerUrls: ["https://holesky.beaconcha.in"],
+								},
+							],
+						});
+						setStatus("success");
+						setMessage("Successfully added and switched to Holesky network");
+					} catch (addError) {
+						setStatus("error");
+						setMessage("Failed to add Holesky network: " + addError.message);
+					}
+				} else {
+					setStatus("error");
+					setMessage(
+						"Failed to switch to Holesky network: " + switchError.message
+					);
+				}
+			}
+		} catch (error) {
+			setStatus("error");
+			setMessage("An error occurred: " + error.message);
 		}
 	};
 
@@ -153,10 +224,7 @@ export default function CourseStore() {
 			<Toaster position='top-right' />
 			<div>
 				{!account ? (
-					<button
-						onClick={connectWallet}
-                        className="flex items-center"
-					>
+					<button onClick={connectWallet} className='flex items-center'>
 						<Wallet className='mr-2' /> Connect Wallet
 					</button>
 				) : (
